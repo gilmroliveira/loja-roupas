@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pedidos - Loja de Roupas</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; }
+    header { background:#222; color:#fff; padding:16px 32px; }
+    main { max-width:960px; margin:24px auto; background:#fff; padding:24px 32px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+    form { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+    form input { padding:6px 8px; flex:1 1 160px; }
+    form button { padding:8px 16px; background:#007bff; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+    form button:hover { background:#0056b3; }
+    table { width:100%; border-collapse:collapse; margin-top:8px; }
+    th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+    th { background:#f0f0f0; }
+    nav a { color:#fff; margin-right:12px; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="clientes.html">Clientes</a>
+    </nav>
+    <h1>Pedidos</h1>
+  </header>
+  <main>
+    <form id="form-pedido">
+      <input type="number" id="id_cliente" placeholder="ID do Cliente" required />
+      <input type="text" id="produto" placeholder="Produto (ex: Camiseta)" required />
+      <input type="number" id="quantidade" placeholder="Quantidade" min="1" required />
+      <input type="date" id="data_pedido" required />
+      <button type="submit">Registrar Pedido</button>
+    </form>
+
+    <h2>Lista de Pedidos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Cliente</th><th>Produto</th><th>Qtd</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-pedidos"></tbody>
+    </table>
+  </main>
+
+  <script>
+    const apiBase = '/api/pedidos';
+
+    async function carregarPedidos() {
+      const res = await fetch(apiBase);
+      const dados = await res.json();
+      const tbody = document.getElementById('tbody-pedidos');
+      tbody.innerHTML = '';
+      dados.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.id_pedido}</td>
+          <td>${p.nome_cliente}</td>
+          <td>${p.produto}</td>
+          <td>${p.quantidade}</td>
+          <td>${p.data_pedido}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('form-pedido').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = {
+        id_cliente: Number(document.getElementById('id_cliente').value),
+        produto: document.getElementById('produto').value,
+        quantidade: Number(document.getElementById('quantidade').value),
+        data_pedido: document.getElementById('data_pedido').value
+      };
+      await fetch(apiBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      document.getElementById('form-pedido').reset();
+      carregarPedidos();
+    });
+
+    carregarPedidos();
+  </script>
+</body>
+</html>

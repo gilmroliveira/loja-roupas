@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loja de Roupas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 16px 32px;
+    }
+    header h1 {
+      margin: 0;
+    }
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 24px 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .cards {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .card {
+      flex: 1 1 260px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      background: #fafafa;
+    }
+    .card h2 {
+      margin-top: 0;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+    }
+    .card a:hover {
+      background: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 12px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Loja de Roupas</h1>
+  </header>
+  <main>
+    <p>Bem-vindo(a) ao sistema de gestão da Loja de Roupas. Escolha uma área para gerenciar:</p>
+    <div class="cards">
+      <div class="card">
+        <h2>Clientes</h2>
+        <p>Cadastre e atualize os clientes da loja.</p>
+        <a href="clientes.html">Gerenciar clientes</a>
+      </div>
+      <div class="card">
+        <h2>Pedidos</h2>
+        <p>Registre pedidos de roupas associados aos clientes.</p>
+        <a href="pedidos.html">Gerenciar pedidos</a>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>Sistema acadêmico - Desenvolvimento Web II</p>
+  </footer>
+</body>
+</html>
